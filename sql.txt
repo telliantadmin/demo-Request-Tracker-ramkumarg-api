@@ -1,0 +1,24 @@
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(50) NOT NULL,
+    Password VARCHAR(100) NOT NULL,
+    Email VARCHAR(100),
+    Role ENUM('Admin', 'Agent', 'User') NOT NULL
+)
+
+ALTER TABLE Users
+ADD COLUMN isVerified BOOLEAN DEFAULT FALSE;
+
+CREATE TABLE Requests (
+    RequestID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(100) NOT NULL,
+    Description TEXT,
+    Priority ENUM('Low', 'Medium', 'High') NOT NULL,
+    Status ENUM('Open', 'In Progress', 'Resolved', 'Closed') NOT NULL,
+    RequesterID INT NOT NULL,
+    AssignedToID INT,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP,
+    FOREIGN KEY (RequesterID) REFERENCES Users(UserID),
+    FOREIGN KEY (AssignedToID) REFERENCES Users(UserID)
+)
