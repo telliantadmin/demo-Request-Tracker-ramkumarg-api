@@ -66,7 +66,7 @@ router.post("/signup", (req, res) => {
                 var token = jwt.sign({
                     username: username,
                 }, process.env.SECRET_KEY, { expiresIn: '24h' });
-                var host = "https://" + req.headers.host + "/api/auth/verify?token=" + token + "&url=" + req.headers.origin+'/auth/login'
+                var host = "https://" + req.headers.host + "/api/auth/verify?token=" + token + "&url=" + req.headers.origin+'#/auth/login'
                 
                 // send mail with defined transport object
                 var mailOptions = {
@@ -84,7 +84,7 @@ router.post("/signup", (req, res) => {
                     <span style="color: #007bff;">${encodeURI(host)}</span>
                     </p>
                     <p style="font-family: Arial, sans-serif; color: #666; font-size: 14px; margin-top: 30px;">
-                    Need help? Apologies, we don't have support available at the moment.
+                    Need help? Apologies, we don't have support available before creating account.
                     </p>
                     `
                     
