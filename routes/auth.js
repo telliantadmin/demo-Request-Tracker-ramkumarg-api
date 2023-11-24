@@ -102,7 +102,7 @@ router.post("/signup", (req, res) => {
             }
         });
     } catch (e) {
-        res.status(500).send({ error: e.message });
+        res.send({ error: e.message });
     }
 });
 router.get('/verify', function (req, res) {

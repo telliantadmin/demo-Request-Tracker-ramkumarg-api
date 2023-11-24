@@ -39,7 +39,7 @@ router.post('/delete', function (req, res) {
         }
     
     } catch (e) {
-        res.status(500).send({ error: e.message });
+        res.send({ error: e.message });
     }
 });
 
@@ -56,7 +56,7 @@ router.post('/update', (req, res) => {
         if(req.body.password) {
             db.query("UPDATE Users SET USERNAME=?, PASSWORD=?, EMAIL=?, ROLE=?, isVerified=? WHERE UserID = ?", [username, md5(password), email, role, 1, id], (err, result) => {
                 if (err) {
-                    res.status(500).send({ error: "Error updating user" });
+                    res.send({ error: "Error updating user" });
                 } else {
                     if (result.affectedRows > 0) {
                         res.send({ message: "User updated successfully" });
@@ -68,7 +68,7 @@ router.post('/update', (req, res) => {
         } else {
             db.query("UPDATE Users SET USERNAME=?, EMAIL=?, ROLE=?, isVerified=? WHERE UserID = ?", [username, email, role, 1, id], (err, result) => {
                 if (err) {
-                    res.status(500).send({ error: "Error updating user" });
+                    res.send({ error: "Error updating user" });
                 } else {
                     if (result.affectedRows > 0) {
                         res.send({ message: "User updated successfully" });
@@ -80,7 +80,7 @@ router.post('/update', (req, res) => {
         }
        
     } catch (e) {
-        res.status(500).send({ error: e.message });
+        res.send({ error: e.message });
     }
 });
 
@@ -94,13 +94,13 @@ router.post("/add", (req, res) => {
     try {
         db.query("INSERT INTO Users (USERNAME, PASSWORD, EMAIL, ROLE, isVerified) VALUES (?, ?, ?, ?, ?)", [username, password, email, role, true], (err, result) => {
             if (err) {
-                res.status(500).send({ error: "Error creating user" });
+                res.send({ error: "Error creating user" });
             } else {
                 res.send({ message: "User created successfully" });
             }
         });
     } catch (e) {
-        res.status(500).send({ error: e.message });
+        res.send({ error: e.message });
     }
 });
 

@@ -85,7 +85,7 @@ router.post('/update', (req, res) => {
     try {
         db.query("UPDATE Requests SET Title=?, Description=?, Status=?, UpdatedAt=?, AssignedToID=?, Priority=? WHERE RequestID = ?", [title, description, status, formattedTimestamp, assignedto, priority, id], (err, result) => {
             if (err) {
-                res.status(500).send({ error: "Error updating Request" });
+                res.send({ error: "Error updating Request" });
             } else {
                 if (result.affectedRows > 0) {
                     res.send({ message: "Request updated successfully" });
@@ -95,7 +95,7 @@ router.post('/update', (req, res) => {
             }
         });
     } catch (e) {
-        res.status(500).send({ error: e.message });
+        res.send({ error: e.message });
     }
 });
 
@@ -114,13 +114,13 @@ router.post("/add", (req, res) => {
     try {
         db.query("INSERT INTO Requests (Title, Description, UpdatedAt, Priority, Status, AssignedToID, RequesterID) VALUES (?, ?,?, ?, ?, ?, ?)", [title, description, formattedTimestamp, Priority, Status, AssignedToID, getUserIdFromToken(req.headers['authorization'])], (err, result) => {
             if (err) {
-                res.status(500).send({ error: err });
+                res.send({ error: err });
             } else {
                 res.send({ message: "Request created successfully" });
             }
         });
     } catch (e) {
-        res.status(500).send({ error: e.message });
+        res.send({ error: e.message });
     }
 });
 
